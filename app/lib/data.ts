@@ -6,8 +6,8 @@ import 'server-only'
 import axios from 'axios'
 
 export async function fetchPokemon() {
+    noStore();
     try {
-        noStore();
         const response = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=21');
         return (response.data.results);
     } catch (error) {
@@ -16,6 +16,7 @@ export async function fetchPokemon() {
 };
 
 export async function fetchMorePokemon(length:number) {
+    noStore();
     try {
         const response = await axios.get(`https://pokeapi.co/api/v2/pokemon?limit=${length+21}`);
         return (response.data.results);
