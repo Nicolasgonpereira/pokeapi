@@ -48,7 +48,7 @@ export default function Home() {
     }, [pokemonList,loading,loadMorePokemon]);
 
     return (
-        <>
+        <section>
         <p style={{color:'lightgray', fontWeight:'bold'}}>Powered by: Nicolas Gonçalves Pereira</p>
         <div className="container" style={{textAlign:'center'}}>
             <Image src='/pokedexlogo.png' alt='Pokedex Logo' width={250} height={80} priority style={{marginBottom:'10px'}}/>
@@ -70,6 +70,6 @@ export default function Home() {
                 </div>
             )}
         </div>
-        </>
+        </section>
     );
 }
