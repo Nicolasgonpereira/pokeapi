@@ -53,8 +53,8 @@ export default function Home() {
 
     return (
         <section>
-        <p style={{color:'lightgray', fontWeight:'bold'}}>Powered by: Nicolas Gonçalves Pereira</p>
-        <div className="container" style={{textAlign:'center'}}>
+        <p style={{color:'lightgray', fontWeight:'bold',display:'flex',position:'absolute',top:'.25rem',margin:'0px'}}>Powered by: Nicolas Gonçalves Pereira</p>
+        <div className="container" style={{textAlign:'center',padding:'0px'}}>
             <Image src='/pokedexlogo.png' alt='Pokedex Logo' width={250} height={80} priority style={{marginBottom:'10px'}}/>
             <div className="pokemon-grid">
                 {pokemonList.map((pokemon:any) => (
