@@ -14,24 +14,24 @@ export default function PokemonCard (pokemon:any) {
     const [pokemonData, setPokemonData] = useState<any>(null);
     const [selectedPokemon,setSelectedPokemon] = useState<any>(null);
     const pokeTypes:any={
-        normal:{card:'#a43000',type:'#a43737'},
-        fighting:{card:'#eca6a6',type:'#ea9999'},
-        flying:{card:'#fae0e0',type:'#f4cccc'},
-        poison:{card:'#e9c2d5',type:'#d5a6bd'},
-        ground:{card:'#cc7112',type:'#b45f06'},
-        rock:{card:'#bab2b2',type:'#999999'},
-        bug:{card:'#35910d',type:'#38761d'},
-        ghost:{card:'#a093c5',type:'#8e7cc3'},
-        steel:{card:'#eeeeee',type:'#d4cdcd'},
-        fire:{card:'#f7685d',type:'#f44336'},
-        water:{card:'#4399da',type:'#2986cc'},
-        grass:{card:'#8fce00',type:'#7baa11'},
-        electric:{card:'#fffa2a',type:'#f4ee00'},
-        psychic:{card:'#e4e0ed',type:'#d9d2e9'},
-        ice:{card:'#eaf5ff',type:'#cfe2f3'},
-        dragon:{card:'#ffe8a4',type:'#ffd966'},
-        dark:{card:'#716d6d',type:'#444444'},
-        fairy:{card:'#ff92da',type:'#ff71ce'},
+        normal:'#a43000',
+        fighting:'#eca6a6',
+        flying:'#fae0e0',
+        poison:'#e9c2d5',
+        ground:'#cc7112',
+        rock:'#bab2b2',
+        bug:'#35910d',
+        ghost:'#a093c5',
+        steel:'#eeeeee',
+        fire:'#f7685d',
+        water:'#4399da',
+        grass:'#8fce00',
+        electric:'#fffa2a',
+        psychic:'#e4e0ed',
+        ice:'#eaf5ff',
+        dragon:'#ffe8a4',
+        dark:'#716d6d',
+        fairy:'#ff92da',
     }
 
     function handleOpenPokemonCard(pokemon:any) {
@@ -59,12 +59,12 @@ export default function PokemonCard (pokemon:any) {
         <>
         <div onClick={()=>handleOpenPokemonCard(pokemon)}>
             {pokemonData ? (
-                <Box className="card" display='flex' flexDirection='row' sx={{justifyContent:'space-between', backgroundColor:pokeTypes[pokemonData.types[0].type.name].card}}>
+                <Box className="card" display='flex' flexDirection='row' sx={{justifyContent:'space-between', backgroundColor:pokeTypes[pokemonData.types[0].type.name]}}>
                     <Box display='flex' flexDirection='column' alignItems='center' sx={{width:'50%'}}>
                         <h3>{`${pokemonData.name.charAt(0).toUpperCase()}${pokemonData.name.slice(1)}`}</h3>
                         <Box display='flex' flexDirection='row' className="types">
                             {pokemonData.types.map((type:any, index:any) => (
-                                <Box key={index} className="type" sx={{backgroundColor:pokeTypes[type.type.name].type}}>{type.type.name.charAt(0).toUpperCase()}{type.type.name.slice(1)}</Box>
+                                <Box key={index} className="type" sx={{backgroundColor:pokeTypes[type.type.name],filter:'brightness(1.1)'}}>{type.type.name.charAt(0).toUpperCase()}{type.type.name.slice(1)}</Box>
                             ))}
                         </Box>
                     </Box>
