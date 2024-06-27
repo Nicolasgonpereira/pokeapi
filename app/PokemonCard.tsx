@@ -64,7 +64,7 @@ export default function PokemonCard (pokemon:any) {
                         <h3>{`${pokemonData.name.charAt(0).toUpperCase()}${pokemonData.name.slice(1)}`}</h3>
                         <Box display='flex' flexDirection='row' className="types">
                             {pokemonData.types.map((type:any, index:any) => (
-                                <Box key={index} className="type" sx={{backgroundColor:pokeTypes[type.type.name].type}}>{type.type.name}</Box>
+                                <Box key={index} className="type" sx={{backgroundColor:pokeTypes[type.type.name].type}}>{type.type.name.charAt(0).toUpperCase()}{type.type.name.slice(1)}</Box>
                             ))}
                         </Box>
                     </Box>
