@@ -15,6 +15,7 @@ interface Pokemon {
 export default function Home() {
     const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
     const [loading, setLoading] = useState(false);
+    const [listComplete, setListComplete] = useState(false);
 
     useEffect(() => {
         setLoading(true);
@@ -33,6 +34,9 @@ export default function Home() {
     },[pokemonList]);
 
     useEffect(() => {
+        if(pokemonList.length>=1288){
+            setListComplete(true);
+        } else {
         if(window.innerWidth >= 768){
             const handleScroll = () => {
                 const { scrollTop, scrollHeight, clientHeight } = document.documentElement || {};
@@ -44,7 +48,7 @@ export default function Home() {
 
             window.addEventListener('scroll', handleScroll);
             return () => window.removeEventListener('scroll', handleScroll);
-        }
+        }}
     }, [pokemonList,loading,loadMorePokemon]);
 
     return (
@@ -64,7 +68,7 @@ export default function Home() {
                     </div>
                 )}
             </div>
-            {!loading && (
+            {!listComplete && (
                 <div className="load-more-button" style={{marginTop:'10px'}}>
                     <Button variant="contained" color='primary' onClick={loadMorePokemon}>Load more</Button>
                 </div>
