@@ -6,9 +6,13 @@ import { useState } from 'react';
 import {Button} from '@mui/material';
 import PokeComponentAbout from './Components/PokeComponentAbout';
 import PokeComponentStats from './Components/PokeComponentStats';
+import PokeComponentEvolution from './Components/PokeComponentEvolution';
+
 
 
 export default function PokeTabs({pokemon}:any){
+
+    const [tabSelected, isTabSelected] = useState('Stats');
     const tabs =[
         {
             label:'About',
@@ -20,11 +24,11 @@ export default function PokeTabs({pokemon}:any){
         },
         {
             label:'Evolution',
-            component:'none'
+            component:<PokeComponentEvolution pokemon={pokemon}/>
         }
     ];
 
-    const [tabSelected, isTabSelected] = useState('Stats');
+
     
     return (
         <Box>
