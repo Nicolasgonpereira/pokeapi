@@ -5,9 +5,8 @@ import { fetchSpeciesInfo } from '../../data';
 import { useEffect, useState } from 'react';
 
 
-export default function PokeComponentEvolution({pokemon}:any){
+export default function PokeComponentEvolution({pokemon,pokeSpeciesInfo}:any){
 
-    const [pokeSpeciesInfo,setPokeSpeciesInfo] = useState<any>(null);
 
     function firstLetterBig(phase:string){
         return phase.charAt(0).toUpperCase()+phase.slice(1);
@@ -37,19 +36,6 @@ export default function PokeComponentEvolution({pokemon}:any){
             return evolvesFiltered;
         }
     }
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await fetchSpeciesInfo(pokemon);
-                setPokeSpeciesInfo(response);
-            } catch (error) {
-                console.error('Error fetching Pokemon data:', error);
-            }
-        };
-        fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
     
     const foundEvolves = findSpecies(pokeSpeciesInfo);
     const evolves=(checkStageEvolveChain(foundEvolves,pokemon))?.reverse();

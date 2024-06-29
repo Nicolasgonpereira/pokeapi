@@ -10,7 +10,7 @@ import PokeComponentEvolution from './Components/PokeComponentEvolution';
 
 
 
-export default function PokeTabs({pokemon}:any){
+export default function PokeTabs({pokemon,pokeSpeciesInfo}:any){
 
     const [tabSelected, isTabSelected] = useState('Stats');
     const tabs =[
@@ -24,7 +24,7 @@ export default function PokeTabs({pokemon}:any){
         },
         {
             label:'Evolution',
-            component:<PokeComponentEvolution pokemon={pokemon}/>
+            component:<PokeComponentEvolution pokemon={pokemon} pokeSpeciesInfo={pokeSpeciesInfo}/>
         }
     ];
 
