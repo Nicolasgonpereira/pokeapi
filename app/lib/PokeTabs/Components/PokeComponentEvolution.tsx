@@ -8,7 +8,6 @@ import { useEffect, useState } from 'react';
 export default function PokeComponentEvolution({pokemon}:any){
 
     const [pokeSpeciesInfo,setPokeSpeciesInfo] = useState<any>(null);
-    const [evolves,setEvolves]= useState<any[]>([]);
 
     function firstLetterBig(phase:string){
         return phase.charAt(0).toUpperCase()+phase.slice(1);
@@ -49,23 +48,17 @@ export default function PokeComponentEvolution({pokemon}:any){
             }
         };
         fetchData();
-    }, [pokemon]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+    
+    const foundEvolves = findSpecies(pokeSpeciesInfo);
+    const evolves=(checkStageEvolveChain(foundEvolves,pokemon))?.reverse();
 
-    useEffect(() => {
-        if (pokeSpeciesInfo) {
-            const foundEvolves:any[] = findSpecies(pokeSpeciesInfo);
-            const evolves=checkStageEvolveChain(foundEvolves,pokemon);
-            if (evolves){
-            setEvolves(evolves.reverse());
-            }
-        }
-    },[pokeSpeciesInfo,pokemon])
-
-    if (!pokeSpeciesInfo) {
+    if (!evolves) {
         return <Box>Loading...</Box>;}
 
     return (
-        <Box>
+        <Box sx={{paddingBottom:'1rem'}}>
             {(evolves.length>0?evolves.map((evolve: any, index: number) => (
                 <Box key={index} sx={{marginTop:'16px'}}>
                     {firstLetterBig(evolve.species.name)}

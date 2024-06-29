@@ -7,7 +7,7 @@ export default function PokeComponentAbout({pokemon}:any){
     };
 
     return (
-        <Box>
+        <Box sx={{paddingBottom:'1rem'}}>
             <p><span style={{fontWeight:'bold'}}>Experiência básica:</span> {pokemon.base_experience}</p>
             <p><span style={{fontWeight:'bold'}}>Altura:</span> {(pokemon.height/10).toFixed(2)} m</p>
             <p><span style={{fontWeight:'bold'}}>Peso:</span> {(pokemon.weight/10).toFixed(2)} kg</p>

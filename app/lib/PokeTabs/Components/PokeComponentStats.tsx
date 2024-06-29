@@ -7,7 +7,7 @@ export default function PokeComponentStats({pokemon}:any){
     };
 
     return (
-        <Box>
+        <Box sx={{paddingBottom:'1rem'}}>
             {pokemon.stats.map((inter:any,index:any)=>(
                 <Box key={index}>
                 <p><span style={{fontWeight:'bold'}}>{fristLetterBig(inter.stat.name)}</span>: {inter.base_stat}</p>
