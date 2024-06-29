@@ -29,18 +29,14 @@ export default function PokeDetails({pokeColors,pokemon,onClose,open,selectedPok
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selectedPokemon]);
 
-
-
-    const isMobile=window.innerWidth<=600;
-
     return(
         <>
             {selectedPokemon ? (
                 <Modal
                     open={open}
                     onClose={onClose}>
-                    <Box sx={{width:(isMobile?'70%':'70%'),height:(isMobile?'80%':'80%'),boxShadow:20, backgroundColor:pokeColors[pokemon.types[0].type.name],borderRadius:'20px',textAlign:'center',outline:'none',position:'absolute',top:'50%',left:'50%',transform:'translate(-50%,-50%)','@media (orientation: landscape)': {overflowY:'auto',width: '50%',height:'80%'},}}>
-                        <Image src={pokemon.sprites.other.dream_world.front_default?pokemon.sprites.other.dream_world.front_default:(pokemon.sprites.other.home.front_default?pokemon.sprites.other.home.front_default:(pokemon.sprites.front_default?pokemon.sprites.front_default:'https://static.vecteezy.com/ti/vetor-gratis/p1/7126739-icone-de-ponto-de-interrogacao-gratis-vetor.jpg'))} alt={pokemon.name} width={200} height={200} style={{marginTop:'20px', left:'50%',maxWidth:'10rem',width:'100%',maxHeight:'10rem',height:'100%'}}/>
+                    <Box sx={{minWidth:'60%',maxWidth:'90%',minHeight:'40%',maxHeight:'90%',boxShadow:20, backgroundColor:pokeColors[pokemon.types[0].type.name],borderRadius:'20px',textAlign:'center',outline:'none',position:'absolute',top:'50%',left:'50%',transform:'translate(-50%,-50%)',overflowY:(window.innerHeight<=600?'overlay':'none')}}>
+                        <Image src={pokemon.sprites.other.dream_world.front_default?pokemon.sprites.other.dream_world.front_default:(pokemon.sprites.other.home.front_default?pokemon.sprites.other.home.front_default:(pokemon.sprites.front_default?pokemon.sprites.front_default:'https://static.vecteezy.com/ti/vetor-gratis/p1/7126739-icone-de-ponto-de-interrogacao-gratis-vetor.jpg'))} alt={pokemon.name} width={200} height={200} style={{marginTop:'20px', left:'50%',maxWidth:'8rem',width:'100%',maxHeight:'8rem',height:'100%'}}/>
                         <h1 style={{fontSize:'24px',fontWeight:'bold',marginBottom:'2px'}}>{fristLetterBig(pokemon.name)}</h1>
                         <PokeTabs
                         pokemon={pokemon}

@@ -72,9 +72,9 @@ export default function PokemonCard (pokemon:any) {
                         <Box sx={{position:'absolute',right:-5,top:-7}}>
                             #{pokemonData.id.toString().padStart(3,'0')}
                         </Box>
-                        <Box sx={{position:'relative',width:'100px', height:'100px'}}>
-                            <Image src='/pokebola.webp' alt='pokebola' width={100} height={100} style={{opacity:0.2}}/>
-                            <Image src={pokemonData.sprites.front_default?pokemonData.sprites.front_default:(pokemonData.sprites.other.home.front_default?pokemonData.sprites.other.home.front_default:'')} alt={pokemonData.name} width={100} height={100} style={{position:'absolute', left:'50%',transform:'translate(-50%)'}}/>
+                        <Box sx={{position:'relative',width:'6rem', height:'6rem'}}>
+                            <Image src='/pokebola.webp' alt='pokebola' width={100} height={100} style={{opacity:0.2,width:'6rem',height:'6rem'}}/>
+                            <Image src={pokemonData.sprites.front_default?pokemonData.sprites.front_default:(pokemonData.sprites.other.home.front_default?pokemonData.sprites.other.home.front_default:'')} alt={pokemonData.name} width={100} height={100} style={{position:'absolute', left:'50%',transform:'translate(-50%)',width:'6rem',height:'6rem'}}/>
                         </Box>
                         
                     </Box>
