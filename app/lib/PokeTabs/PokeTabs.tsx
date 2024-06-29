@@ -12,7 +12,7 @@ import PokeComponentEvolution from './Components/PokeComponentEvolution';
 
 export default function PokeTabs({pokemon,pokeSpeciesInfo}:any){
 
-    const [tabSelected, isTabSelected] = useState('Stats');
+    const [tabSelected, setTabSelected] = useState('Stats');
     const tabs =[
         {
             label:'About',
@@ -33,7 +33,7 @@ export default function PokeTabs({pokemon,pokeSpeciesInfo}:any){
     return (
         <Box>
             {tabs.map((inter:any)=>(
-                    <Button key={'tabButton'+inter.label} variant='text' sx={{color:'black', backgroundColor:inter.label===tabSelected?'rgba(211, 211, 211, 0.5)':'transparent'}} onClick={()=>isTabSelected(inter.label)}>{inter.label}</Button>
+                    <Button key={'tabButton'+inter.label} variant='text' sx={{color:'black', backgroundColor:tabSelected===inter.label?'rgba(211, 211, 211, 0.5)':'transparent','&:hover':{backgroundColor:tabSelected===inter.label?'rgba(211, 211, 211, 0.5)':'transparent'}}} onClick={()=>setTabSelected(inter.label)}>{inter.label}</Button>
             ))}
             {tabs.map(inter=>(
                 <Box key={'tabComponent'+inter.label}>{inter.label===tabSelected?inter.component:null}</Box>))}
