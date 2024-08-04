@@ -1,9 +1,9 @@
 
 import {Box, Modal} from '@mui/material';
 import Image from 'next/image';
-import PokeTabs from './lib/PokeTabs/PokeTabs';
+import PokeTabs from './PokeTabs/PokeTabs';
 import { useEffect, useState } from 'react';
-import { fetchSpeciesInfo } from './lib/data';
+import { fetchSpeciesInfo } from './data';
 
 export default function PokeDetails({pokeColors,pokemon,onClose,open,selectedPokemon}:{pokemon:any,onClose:any,open:any,selectedPokemon:any,pokeColors:any[]}) {
 
