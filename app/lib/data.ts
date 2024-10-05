@@ -1,12 +1,11 @@
 'use server'
 
-import { unstable_noStore as noStore } from 'next/cache';
 import 'server-only';
 
 import axios from 'axios';
 
 export async function fetchPokemon() {
-    noStore();
+    // noStore();
     try {
         //const response = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=151');
         const response = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=21');
@@ -17,7 +16,7 @@ export async function fetchPokemon() {
 };
 
 export async function fetchMorePokemon(length:number) {
-    noStore();
+    // noStore();
     try {
         const response = await axios.get(`https://pokeapi.co/api/v2/pokemon?limit=${length+21}`);
         return (response.data.results);
@@ -27,7 +26,7 @@ export async function fetchMorePokemon(length:number) {
 };
 
 export async function fetchSpeciesInfo(pokemon:any) {
-    noStore();
+    // noStore();
     try {
         const urlEvolutionChain = await axios.get(`${pokemon.species.url}`).then(res=>res.data.evolution_chain.url);
         const response = await axios.get(urlEvolutionChain).then(res=>res.data);
@@ -40,20 +39,10 @@ export async function fetchSpeciesInfo(pokemon:any) {
 
 
 export async function fetchPokemonSearch() {
-    noStore();
+    // noStore();
     try {
         const response = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0');
         return (response.data.results);
-    } catch (error) {
-        console.error('Erro ao carregar a lista de Pokemon', error);
-    }
-};
-
-export async function fetchPokemonCard(url:string) {
-    noStore();
-    try {
-        const response = await axios.get(url);
-        return (response.data);
     } catch (error) {
         console.error('Erro ao carregar a lista de Pokemon', error);
     }
