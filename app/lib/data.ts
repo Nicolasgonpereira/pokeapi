@@ -30,7 +30,6 @@ export async function fetchSpeciesInfo(pokemon:any) {
     try {
         const urlEvolutionChain = await axios.get(`${pokemon.species.url}`).then(res=>res.data.evolution_chain.url);
         const response = await axios.get(urlEvolutionChain).then(res=>res.data);
-        console.log(response);
         return (response);
     } catch (error) {
         console.error('Erro ao carregar as informações de Pokemon', error);
