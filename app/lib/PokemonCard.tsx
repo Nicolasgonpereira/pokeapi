@@ -1,11 +1,11 @@
 //PokemonCard.tsx
 'use client'
 
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { Box } from '@mui/material';
 import Image from 'next/image';
-import {Box} from '@mui/material'
+import { useEffect, useState } from 'react';
 import PokeDetails from './PokeDetails';
+import { fetchPokemonCard } from './data';
 
 //interface Pokemon {name:string;url:string}
 
@@ -45,8 +45,8 @@ export default function PokemonCard (pokemon:any) {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(pokemon.url);
-                setPokemonData(response.data);
+                const response = await fetchPokemonCard(pokemon.url);
+                setPokemonData(response);
             } catch (error) {
                 console.error('Error fetching Pokemon data:', error);
             }

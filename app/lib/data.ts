@@ -1,9 +1,9 @@
 'use server'
 
 import { unstable_noStore as noStore } from 'next/cache';
-import 'server-only'
+import 'server-only';
 
-import axios from 'axios'
+import axios from 'axios';
 
 export async function fetchPokemon() {
     noStore();
@@ -35,5 +35,26 @@ export async function fetchSpeciesInfo(pokemon:any) {
         return (response);
     } catch (error) {
         console.error('Erro ao carregar as informações de Pokemon', error);
+    }
+};
+
+
+export async function fetchPokemonSearch() {
+    noStore();
+    try {
+        const response = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0');
+        return (response.data.results);
+    } catch (error) {
+        console.error('Erro ao carregar a lista de Pokemon', error);
+    }
+};
+
+export async function fetchPokemonCard(url:string) {
+    noStore();
+    try {
+        const response = await axios.get(url);
+        return (response.data);
+    } catch (error) {
+        console.error('Erro ao carregar a lista de Pokemon', error);
     }
 };

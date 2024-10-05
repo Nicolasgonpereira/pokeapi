@@ -1,20 +1,19 @@
 //page.tsx
 'use client'
 
-import React, { useState, useEffect, useCallback } from 'react';
-import PokemonCard from './lib/PokemonCard';
+import { Button, TextField } from '@mui/material';
 import Image from 'next/image';
-import {Button, TextField} from '@mui/material';
-import { fetchPokemon,fetchMorePokemon } from './lib/data';
-import axios from 'axios';
+import { useCallback, useEffect, useState } from 'react';
+import { fetchMorePokemon, fetchPokemon, fetchPokemonSearch } from './lib/data';
+import PokemonCard from './lib/PokemonCard';
 
-interface Pokemon {
+interface PokemonList {
   name:string;
   url:string;
 }
 
 export default function Home() {
-    const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
+    const [pokemonList, setPokemonList] = useState<PokemonList[]>([]);
     const [loading, setLoading] = useState(false);
     const [listComplete, setListComplete] = useState(false);
     const [search, setSearch] = useState<string>('');
@@ -24,7 +23,7 @@ export default function Home() {
         setLoading(true);
         async function fetchData() {
             const res = await fetchPokemon();
-            const resallPokemonList = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0').then((res:any)=>res.data.results);
+            const resallPokemonList = await fetchPokemonSearch();
             setAllPokemonList(resallPokemonList);
             setPokemonList(res);
         };
@@ -59,11 +58,11 @@ export default function Home() {
 
     return (
         <section>
-        <p style={{color:'lightgray', fontWeight:'bold',display:'flex',position:'absolute',top:'.25rem',margin:'0px'}}>Powered by: Nicolas Gonçalves Pereira</p>
+        <p style={{color:'lightgray',fontSize:'1rem', fontWeight:'bold',display:'flex',position:'absolute',top:'.25rem',margin:'0px'}}>Powered by: Nicolas Gonçalves Pereira</p>
         <div className="container" style={{textAlign:'center',padding:'0px'}}>
             <Image src='/pokedexlogo.png' alt='Pokedex Logo' width={250} height={80} priority style={{marginBottom:'10px'}}/>
             <div style={{marginBottom:'1rem'}}>
-            <TextField variant='outlined' placeholder='search' onChange={(e)=>setSearch(e.target.value)}/>
+                <TextField variant='outlined' size='small' placeholder='search' sx={{maxWidth:'10rem'}} onChange={(e)=>setSearch(e.target.value)}/>
             </div>
             <div className="pokemon-grid">
                 {!!(search && allPokemonList)? (allPokemonList.filter((pokemon:any)=>pokemon.name.toLowerCase().includes(search.toLowerCase())).map((pokemon:any) => (
