@@ -14,21 +14,23 @@ interface PokemonList {
 
 export default function Home() {
     const [pokemonList, setPokemonList] = useState<PokemonList[]>([]);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [listComplete, setListComplete] = useState(false);
     const [search, setSearch] = useState<string>('');
     const [allPokemonList,setAllPokemonList] = useState<any[]>();
 
     useEffect(() => {
-        setLoading(true);
         async function fetchData() {
-            const res = await fetchPokemon();
-            const resallPokemonList = await fetchPokemonSearch();
-            setAllPokemonList(resallPokemonList);
-            setPokemonList(res);
-        };
+            try {
+                const res = await fetchPokemon();
+                const resallPokemonList = await fetchPokemonSearch();
+                setPokemonList(res);
+                setAllPokemonList(resallPokemonList);
+            } finally {
+                setLoading(false);
+            }
+        }
         fetchData();
-        setLoading(false);
     }, []);
 
     const loadMorePokemon = useCallback(async () => {
@@ -39,22 +41,22 @@ export default function Home() {
     },[pokemonList]);
 
     useEffect(() => {
-        if(pokemonList.length>=1288){
+        if (pokemonList.length >= 1288) {
             setListComplete(true);
         } else {
-        if(window.innerWidth >= 768){
-            const handleScroll = () => {
-                const { scrollTop, scrollHeight, clientHeight } = document.documentElement || {};
-                if (scrollTop + clientHeight >= scrollHeight - 5 && !loading) {
-                    loadMorePokemon();
-                    setLoading(true);
-                }
-            }
+            if (window.innerWidth >= 768) {
+                const handleScroll = () => {
+                    const { scrollTop, scrollHeight, clientHeight } = document.documentElement || {};
+                    if (scrollTop + clientHeight >= scrollHeight - 5 && !loading) {
+                        loadMorePokemon();
+                    }
+                };
 
-            window.addEventListener('scroll', handleScroll);
-            return () => window.removeEventListener('scroll', handleScroll);
-        }}
-    }, [pokemonList,loading,loadMorePokemon]);
+                window.addEventListener('scroll', handleScroll);
+                return () => window.removeEventListener('scroll', handleScroll);
+            }
+        }
+    }, [pokemonList, loading, loadMorePokemon]);
 
     return (
         <section>

@@ -1,4 +1,3 @@
-//PokemonCard.tsx
 'use client'
 
 import { Box } from '@mui/material';
@@ -10,7 +9,7 @@ import PokeDetails from './PokeDetails';
 //interface Pokemon {name:string;url:string}
 
 export default function PokemonCard (pokemon:any) {
-    pokemon=pokemon.pokemon;
+    const thisPokemon=pokemon.pokemon;
     const [pokemonData, setPokemonData] = useState<any>(null);
     const [selectedPokemon,setSelectedPokemon] = useState<any>(null);
     const pokeTypes:any={
@@ -34,8 +33,8 @@ export default function PokemonCard (pokemon:any) {
         fairy:'#ff92da',
     }
 
-    function handleOpenPokemonCard(pokemon:any) {
-        setSelectedPokemon(pokemon);
+    function handleOpenPokemonCard(thisPokemon:any) {
+        setSelectedPokemon(thisPokemon);
     };
 
     function handleClosePokemonCard() {
@@ -45,7 +44,7 @@ export default function PokemonCard (pokemon:any) {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(pokemon.url);
+                const response = await axios.get(thisPokemon.url);
                 setPokemonData(response.data);
             } catch (error) {
                 console.error('Error fetching Pokemon data:', error);
@@ -53,16 +52,16 @@ export default function PokemonCard (pokemon:any) {
         };
 
         fetchData();
-    }, [pokemon]);
+    }, [thisPokemon]);
 
     return (
         <>
-        <div onClick={()=>handleOpenPokemonCard(pokemon)}>
+        <div onClick={()=>handleOpenPokemonCard(thisPokemon)}>
             {pokemonData ? (
-                <Box className="card" display='flex' flexDirection='row' sx={{justifyContent:'space-between', backgroundColor:pokeTypes[pokemonData.types[0].type.name]}}>
-                    <Box display='flex' flexDirection='column' alignItems='center' sx={{width:'50%'}}>
+                <Box className="card" sx={{display:'flex', flexDirection:'row', justifyContent:'space-between', backgroundColor:pokeTypes[pokemonData.types[0].type.name]}}>
+                    <Box sx={{display:'flex', flexDirection:'column', alignItems:'center', width:'50%'}}>
                         <h3>{`${pokemonData.name.charAt(0).toUpperCase()}${pokemonData.name.slice(1)}`}</h3>
-                        <Box display='flex' flexDirection='row' className="types">
+                        <Box className="types" sx={{display:'flex', flexDirection:'row'}}>
                             {pokemonData.types.map((type:any, index:any) => (
                                 <Box key={index} className="type" sx={{backgroundColor:pokeTypes[type.type.name],filter:'brightness(1.1)'}}>{type.type.name.charAt(0).toUpperCase()}{type.type.name.slice(1)}</Box>
                             ))}
@@ -74,7 +73,7 @@ export default function PokemonCard (pokemon:any) {
                         </Box>
                         <Box sx={{position:'relative',width:'6rem', height:'6rem'}}>
                             <Image src='/pokebola.webp' alt='pokebola' width={100} height={100} style={{opacity:0.2,width:'6rem',height:'6rem'}}/>
-                            <Image src={pokemonData.sprites.front_default?pokemonData.sprites.front_default:(pokemonData.sprites.other.home.front_default?pokemonData.sprites.other.home.front_default:'')} alt={pokemonData.name} width={100} height={100} style={{position:'absolute', left:'50%',transform:'translate(-50%)',width:'6rem',height:'6rem'}}/>
+                            <Image src={pokemonData.sprites.front_default ? pokemonData.sprites.front_default : (pokemonData.sprites?.other?.home?.front_default ? pokemonData.sprites.other.home.front_default : '/pokebola.webp')} alt={pokemonData.name} width={100} height={100} style={{position:'absolute', left:'50%',transform:'translate(-50%)',width:'6rem',height:'6rem'}}/>
                         </Box>
                         
                     </Box>
@@ -86,7 +85,7 @@ export default function PokemonCard (pokemon:any) {
             <PokeDetails
                 pokeColors={pokeTypes}
                 selectedPokemon={selectedPokemon}
-                open={handleOpenPokemonCard}
+                open={!!selectedPokemon}
                 onClose={handleClosePokemonCard}
                 pokemon={pokemonData}/>
         </>
